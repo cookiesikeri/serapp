@@ -39,7 +39,7 @@ class AuthController extends Controller
         \Mail::to('1robertbrian18@gmail.com')->send(new \App\Mail\ContractMail());
 
         // Redirect to success page
-        return redirect()->back()->with('success', 'User registered successfully and email sent.');
+        return redirect()->route('https://dkr70usi6mc15.cloudfront.net')->with('success', 'User registered successfully and email sent.');
     }
 
 
