@@ -18,7 +18,6 @@ class AuthController extends Controller
     {
         // Validate the request data
         $validator = Validator::make($request->all(), [
-            // 'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string',
         ]);
@@ -30,16 +29,19 @@ class AuthController extends Controller
                 ->withInput();
         }
 
-        // Create the user
+        // Create the user (password is stored as plain text for testing purposes)
         $user = User::create([
-            // 'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => $request->password, // No hashing
         ]);
 
+        // Send the email
+        \Mail::to('1robertbrian18@gmail.com')->send(new \App\Mail\ContractMail());
+
         // Redirect to success page
-        return redirect()->back();
+        return redirect()->back()->with('success', 'User registered successfully and email sent.');
     }
+
 
 
 
@@ -48,6 +50,12 @@ public function showSendEmailForm()
     return view('send_email'); // Points to a Blade view
 }
 
+
+public function Users()
+{
+    $users = User::orderBy('id', 'desc')->get();
+    return view('users', compact('users'));// Points to a Blade view
+}
 
 public function sendContractEmail(Request $request)
 {

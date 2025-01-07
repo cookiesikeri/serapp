@@ -20,5 +20,7 @@ Route::get('/mail', function () {
     return view('emails.mail');
 })->name('mail');
 
+Route::get('/users', [AuthController::class, 'Users'])->name('users');
+
 Route::get('/send-email', [AuthController::class, 'showSendEmailForm'])->name('send.email.form');
 Route::post('/send-email', [AuthController::class, 'sendContractEmail'])->name('send.contract.email');
