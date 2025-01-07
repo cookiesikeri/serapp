@@ -23,30 +23,18 @@
             <thead>
                 <tr>
                     <th>S/N</th>
-                    <th>Name</th>
                     <th>Email</th>
                     <th>Password</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
+                @foreach($users as $key=>$post)
                 <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>johndoe@example.com</td>
-                    <td>password123</td>
+                    <td>{{++$key}}</td>
+                    <td>{{ $post->email }}</td>
+                    <td>{{ $post->password }}</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jane Smith</td>
-                    <td>janesmith@example.com</td>
-                    <td>1234abcd</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Sam Wilson</td>
-                    <td>samwilson@example.com</td>
-                    <td>pass5678</td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
