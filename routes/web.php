@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('register.form');
 
+Route::get('/home', function () {
+    return view('welcome');
+})->name('register.form');
+
 // Handle registration submission
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
