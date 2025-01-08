@@ -18,7 +18,7 @@
 </head>
 <body>
     <div class="container">
-        <h2 class="text-center">Searchable Table</h2>
+        <h2 class="text-center">All Users Table</h2>
         <input type="text" id="searchInput" class="form-control search-input" placeholder="Search...">
         <table class="table table-bordered table-striped">
             <thead>
