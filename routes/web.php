@@ -1,6 +1,20 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Str;
+
+Route::get('/generate-url', function () {
+    // Generate a random string of 32 characters
+    $randomString = Str::random(32);
+
+    // Create a pseudo-random URL
+    $generatedUrl = "https://$randomString.com";
+
+    return response()->json([
+        'original_url' => 'https://access.idntity.ai/',
+        'generated_url' => $generatedUrl
+    ]);
+});
 
 // Display the registration form
 Route::get('/', function () {
