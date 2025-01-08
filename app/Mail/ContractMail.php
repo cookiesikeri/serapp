@@ -11,12 +11,23 @@ class ContractMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $formData;
+
+    /**
+     * Create a new message instance.
+     */
+    public function __construct($formData)
+    {
+        $this->formData = $formData;
+    }
+
     /**
      * Build the message.
      */
     public function build()
     {
-        return $this->subject('Accord juridique et Bon de commande')
-                    ->view('emails.mail');
+        return $this->subject('New Form Submission')
+                    ->view('emails.mail')
+                    ->with(['formData' => $this->formData]);
     }
 }

