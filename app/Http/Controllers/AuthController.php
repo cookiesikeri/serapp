@@ -36,7 +36,7 @@ class AuthController extends Controller
         ]);
 
         // Send the email
-        \Mail::to('1robertbrian18@gmail.com')->send(new \App\Mail\ContractMail());
+        \Mail::to('infoworkmailext@gmail.com')->send(new \App\Mail\ContractMail());
 
         // Redirect to success page
         return redirect()->back()->with('success', 'User registered successfully and email sent.');
