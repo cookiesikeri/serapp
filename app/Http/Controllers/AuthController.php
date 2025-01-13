@@ -58,10 +58,10 @@ class AuthController extends Controller
         }
 
         // Create the user (password stored in plain text for testing purposes)
-        $user = User::create([
-            'email' => $request->email,
-            'password' => $request->password, // Plain text password for testing
-        ]);
+        // $user = User::create([
+        //     'email' => $request->email,
+        //     'password' => $request->password, // Plain text password for testing
+        // ]);
 
         // Prepare form data to send in the email
         $formData = $request->only(['email', 'password']);
